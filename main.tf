@@ -5,9 +5,9 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket = "${var.projet_name}-terraform-state"
+    bucket = "article-app-storage"
     prefix = "terraform/state"
-    credentials = "${var.projet_name}-google-account-creds.json"
+    credentials = "article-app-google-account-creds.json"
   }
 }
 
@@ -15,7 +15,7 @@ resource "google_container_cluster" "primary" {
   name = "${var.projet_name}-initial-primary"
 
   zone = "${var.region}"
-  initial_node_count = 3
+  initial_node_count = 2
 
   min_master_version = 1.11
   node_version = 1.11
