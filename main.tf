@@ -33,13 +33,13 @@ resource "google_container_cluster" "primary" {
 }
 
 output "cluster_ca_certificate" {
-  value = "${data.google_container_cluster.article-app-initial-primary.master_auth.0.cluster_ca_certificate}"
+  value = "${google_container_cluster.article-app-initial-primary.master_auth.0.cluster_ca_certificate}"
 }
 
 output "token" {
-  value = "${data.google_client_config.default.access_token}"
+  value = "${google_client_config.default.access_token}"
 }
 
 output "host" {
-  value = "https://${data.google_container_cluster.article-app-initial-primary.endpoint}"
+  value = "https://${google_container_cluster.article-app-initial-primary.endpoint}"
 }
