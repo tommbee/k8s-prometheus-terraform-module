@@ -1,5 +1,5 @@
 variable "projet_name" {
-    default = "article-app"
+    default = "temporal-parser-229715"
 }
 variable "region" {
   default = "europe-west1-c"
