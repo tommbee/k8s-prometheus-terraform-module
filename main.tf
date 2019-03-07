@@ -32,6 +32,10 @@ resource "google_container_cluster" "primary" {
   }
 }
 
+output "token" {
+  value = "${google_container_cluster.primary.access_token}"
+}
+
 output "host" {
   value = "${google_container_cluster.primary.endpoint}"
 }
