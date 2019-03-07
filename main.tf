@@ -1,3 +1,5 @@
+data "google_client_config" "default" {}
+
 provider "google" {
   credentials = "${file("${var.config_file}")}"
   project = "${var.projet_name}"
@@ -33,7 +35,7 @@ resource "google_container_cluster" "primary" {
 }
 
 output "token" {
-  value = "${google_container_cluster.primary.access_token}"
+  value = "${data.google_client_config.default.access_token}"
 }
 
 output "host" {
