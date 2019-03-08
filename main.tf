@@ -5,14 +5,6 @@ provider "google" {
   project = "${var.projet_name}"
 }
 
-terraform {
-  backend "gcs" {
-    bucket = "article-app-storage"
-    prefix = "terraform/state"
-    credentials = "../auth.json"
-  }
-}
-
 resource "google_container_cluster" "primary" {
   name = "${var.projet_name}-initial-primary"
 
