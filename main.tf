@@ -9,7 +9,7 @@ terraform {
   backend "gcs" {
     bucket = "article-app-storage"
     prefix = "terraform/state"
-    credentials = "article-app-google-account-creds.json"
+    credentials = "../auth.json"
   }
 }
 
