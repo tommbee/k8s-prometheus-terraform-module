@@ -1,23 +1,19 @@
-output "token" {
-  value = "${data.google_client_config.default.access_token}"
-}
+# output "token" {
+#   value = "${data.google_client_config.default.access_token}"
+# }
 
 output "host" {
-  value = "${google_container_cluster.primary.endpoint}"
+  value = "${module.gke_cluster.host}"
 }
 
 output "client_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.client_certificate}"
+  value = "${base64decode(module.gke_cluster.client_certificate)}"
 }
 
 output "client_key" {
-  value = "${google_container_cluster.primary.master_auth.0.client_key}"
+  value = "${base64decode(module.gke_cluster.client_key)}"
 }
 
 output "cluster_ca_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.cluster_ca_certificate}"
-}
-
-output "helm_service_account" {
-  value = "${kubernetes_service_account.tiller.metadata.0.name}"
+  value = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
 }
