@@ -26,22 +26,50 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-output "token" {
-  value = "${data.google_client_config.default.access_token}"
+provider "helm" {
+  version = "~> 0.6"
+  service_account = "${kubernetes_service_account.tiller.metadata.0.name}"
+
+  kubernetes {
+    host                   = "${google_container_cluster.primary.endpoint}"
+    token                  = "${data.google_client_config.default.access_token}"
+    cluster_ca_certificate = "${google_container_cluster.primary.master_auth.0.cluster_ca_certificate}"
+  }
 }
 
-output "host" {
-  value = "${google_container_cluster.primary.endpoint}"
+resource "kubernetes_service_account" "tiller" {
+  metadata {
+    name      = "tiller"
+    namespace = "kube-system"
+  }
 }
 
-output "client_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.client_certificate}"
+resource "kubernetes_cluster_role_binding" "tiller" {
+  metadata {
+    name = "tiller"
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+
+  subject {
+    api_group = ""
+    kind      = "ServiceAccount"
+    name      = "tiller"
+    namespace = "kube-system"
+  }
 }
 
-output "client_key" {
-  value = "${google_container_cluster.primary.master_auth.0.client_key}"
-}
+resource "helm_release" "prometheus_operator" {
+  depends_on = ["kubernetes_service_account.tiller"]
+  name  = "monitoring"
+  chart = "stable/prometheus-operator"
+  namespace = "monitoring"
 
-output "cluster_ca_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.cluster_ca_certificate}"
+  values = [
+    "${file("${path.module}/monitoring/prometheus/values.yml")}",
+  ]
 }
