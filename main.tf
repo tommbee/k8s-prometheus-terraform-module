@@ -24,5 +24,4 @@ module "helm" {
   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
   host = "${module.gke_cluster.host}"
   sa_name = "${module.k8s.helm_service_account}"
-  prometheus_overrides = "${var.prometheus_overrides}"
 }

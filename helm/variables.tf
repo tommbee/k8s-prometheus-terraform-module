@@ -3,4 +3,4 @@ variable "client_key" {}
 variable "cluster_ca_certificate" {}
 variable "host" {}
 variable "sa_name" {}
-variable "prometheus_overrides" {}
+

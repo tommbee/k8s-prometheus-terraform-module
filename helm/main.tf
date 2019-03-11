@@ -16,6 +16,6 @@ resource "helm_release" "prometheus_operator" {
   namespace = "monitoring"
 
   values = [
-    "${file("${root.module}/monitoring/prometheus/values.yml")}",
+    "${file("${path.root}/monitoring/prometheus/values.yml")}",
   ]
 }
