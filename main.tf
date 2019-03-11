@@ -37,6 +37,14 @@ provider "helm" {
   }
 }
 
+provider "kubernetes" {
+  host                   = "${google_container_cluster.primary.endpoint}"
+  token                  = "${data.google_client_config.default.access_token}"
+  cluster_ca_certificate = "${google_container_cluster.primary.master_auth.0.cluster_ca_certificate}"
+
+  load_config_file = false
+}
+
 resource "kubernetes_service_account" "tiller" {
   metadata {
     name      = "tiller"
