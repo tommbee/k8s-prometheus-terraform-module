@@ -6,6 +6,6 @@ Use by embedding into a terraform script as a module:
 
 ```
 module "article-app" {
-    source = "git@github.com:tommbee/article-app-terraform.git"
+    source = "git@github.com:tommbee/k8s-prometheus-terraform-module.git"
 }
 ```
