@@ -13,6 +13,7 @@ resource "kubernetes_service_account" "tiller" {
     name      = "tiller"
     namespace = "kube-system"
   }
+  automount_service_account_token = true
 }
 
 resource "kubernetes_cluster_role_binding" "tiller" {
@@ -27,6 +28,7 @@ resource "kubernetes_cluster_role_binding" "tiller" {
   }
 
   subject {
+    api_group = ""
     kind      = "ServiceAccount"
     name      = "tiller"
     namespace = "kube-system"

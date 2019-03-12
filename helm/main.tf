@@ -1,11 +1,8 @@
-variable "helm_version" {
-  default = "v2.9.1"
-}
-
 provider "helm" {
-  tiller_image = "gcr.io/kubernetes-helm/tiller:${var.helm_version}"
-  #namespace = "kube-system"
+  version = "~> 0.7"
+  namespace = "kube-system"
   service_account = "${var.sa_name}}"
+  tiller_image    = "gcr.io/kubernetes-helm/tiller:v2.11.0"
 
   kubernetes {
     #client_certificate     = "${var.client_certificate}"
