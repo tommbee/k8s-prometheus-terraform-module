@@ -18,6 +18,7 @@ module "k8s" {
 
 module "helm" {
   source = "helm"
+  depends_on = [ "module.k8s.helm_service_account" ]
   
   client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
   client_key = "${base64decode(module.gke_cluster.client_key)}"
