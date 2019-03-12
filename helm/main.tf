@@ -1,6 +1,8 @@
 provider "helm" {
   version = "~> 0.6"
+  namespace = "kube-system"
   service_account = "${var.sa_name}}"
+  override = ["spec.template.spec.automountserviceaccounttoken=true"]
 
   kubernetes {
     #client_certificate     = "${var.client_certificate}"
