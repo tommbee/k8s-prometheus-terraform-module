@@ -16,13 +16,14 @@ module "k8s" {
   token = "${module.gke_cluster.token}"
 }
 
-# module "helm" {
-#   source = "helm"
+module "helm" {
+  source = "helm"
   
-#   client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
-#   client_key = "${base64decode(module.gke_cluster.client_key)}"
-#   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
-#   host = "${module.gke_cluster.host}"
-#   sa_name = "${module.k8s.helm_service_account}"
-#   token = "${module.gke_cluster.token}"
-# }
+  client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
+  client_key = "${base64decode(module.gke_cluster.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
+  host = "${module.gke_cluster.host}"
+  token = "${module.gke_cluster.token}"
+  helm_service_account = "${module.k8s.helm_service_account}"
+  helm_namespace = "${module.k8s.helm_namespace}"
+}
