@@ -15,6 +15,7 @@ resource "helm_release" "prometheus_operator" {
   name  = "monitoring"
   chart = "stable/prometheus-operator"
   namespace = "monitoring"
+  depends_on = [ "kubernetes_service_account.tiller" ]
 
   values = [
     "${file("${path.module}/monitoring/prometheus/values.yml")}",
