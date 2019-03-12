@@ -11,11 +11,6 @@ provider "helm" {
   }
 }
 
-# data "helm_repository" "incubator" {
-#     name = "incubator"
-#     url  = "https://kubernetes-charts-incubator.storage.googleapis.com"
-# }
-
 resource "null_resource" "depends_on_hack" {
   triggers {
     version = "${timestamp()}"
@@ -28,20 +23,14 @@ resource "null_resource" "depends_on_hack" {
 }
 
 resource "helm_release" "prometheus_operator" {
-  name  = "monitoring"
-  #repository = "${helm_repository.incubator.metadata.0.name}"
-  chart = "stable/prometheus-operator"
-  namespace = "monitoring"
+  name       = "prometheus-operator"
+  repository = "https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/"
+  chart      = "prometheus-operator"
+  namespace  = "monitoring"
 
   depends_on = [
       "null_resource.depends_on_hack",
   ]
-
-  # depends_on = [
-  #     "kubernetes_service_account.tiller",
-  #     "kubernetes_cluster_role_binding.tiller",
-  #     "helm_repository.incubator",
-  # ]
 
   values = [
     "${file("${path.module}/monitoring/prometheus/values.yml")}",
