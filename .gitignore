@@ -1,1 +1,3 @@
-.terraform/
+article-app-google-account-creds.json
+.terraform
+.terraform/*
