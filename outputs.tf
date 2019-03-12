@@ -17,3 +17,8 @@ output "client_key" {
 output "cluster_ca_certificate" {
   value = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
 }
+
+output "service_account" {
+  value = "${module.k8s.helm_service_account}"
+}
+
