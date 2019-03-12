@@ -21,4 +21,3 @@ output "cluster_ca_certificate" {
 output "service_account" {
   value = "${module.k8s.helm_service_account}"
 }
-
