@@ -13,6 +13,7 @@ module "k8s" {
   client_key = "${base64decode(module.gke_cluster.client_key)}"
   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
   host = "${module.gke_cluster.host}"
+  token = "${module.gke_cluster.token}"
 }
 
 
@@ -24,4 +25,5 @@ module "helm" {
   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
   host = "${module.gke_cluster.host}"
   sa_name = "${module.k8s.helm_service_account}"
+  token = "${module.gke_cluster.token}"
 }
