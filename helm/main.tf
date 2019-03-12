@@ -15,7 +15,7 @@ resource "helm_release" "prometheus_operator" {
   name  = "monitoring"
   chart = "stable/prometheus-operator"
   namespace = "monitoring"
-  depends_on = [ "var.sa_name" ]
+  depends_on = ["${var.sa_name}}"]
 
   values = [
     "${file("${path.module}/monitoring/prometheus/values.yml")}",
