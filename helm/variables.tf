@@ -4,4 +4,3 @@ variable "cluster_ca_certificate" {}
 variable "host" {}
 variable "sa_name" {}
 variable "token" {}
-
