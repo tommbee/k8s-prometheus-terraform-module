@@ -27,7 +27,6 @@ resource "kubernetes_cluster_role_binding" "tiller" {
   }
 
   subject {
-    api_group = ""
     kind      = "ServiceAccount"
     name      = "tiller"
     namespace = "kube-system"

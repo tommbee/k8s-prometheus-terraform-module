@@ -1,12 +1,15 @@
+variable "helm_version" {
+  default = "v2.9.1"
+}
+
 provider "helm" {
-  version = "~> 0.6"
-  namespace = "kube-system"
+  tiller_image = "gcr.io/kubernetes-helm/tiller:${var.helm_version}"
+  #namespace = "kube-system"
   service_account = "${var.sa_name}}"
-  override = ["spec.template.spec.automountserviceaccounttoken=true"]
 
   kubernetes {
-    #client_certificate     = "${var.client_certificate}"
-    #client_key             = "${var.client_key}"
+    client_certificate     = "${var.client_certificate}"
+    client_key             = "${var.client_key}"
     cluster_ca_certificate = "${var.cluster_ca_certificate}"
     host                   = "${var.host}"
     token                  = "${var.token}"
