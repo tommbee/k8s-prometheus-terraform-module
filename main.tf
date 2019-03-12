@@ -6,15 +6,15 @@ module "gke_cluster" {
   config_file = "${var.config_file}"
 }
 
-# module "k8s" {
-#   source = "k8s"
+module "k8s" {
+  source = "k8s"
 
-#   client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
-#   client_key = "${base64decode(module.gke_cluster.client_key)}"
-#   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
-#   host = "${module.gke_cluster.host}"
-#   token = "${module.gke_cluster.token}"
-# }
+  #client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
+  #client_key = "${base64decode(module.gke_cluster.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
+  host = "${module.gke_cluster.host}"
+  token = "${module.gke_cluster.token}"
+}
 
 # module "helm" {
 #   source = "helm"
