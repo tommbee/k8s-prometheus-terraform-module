@@ -1,8 +1,8 @@
 module "gke_cluster" {
   source = "gke"
   
-  projet_name = "temporal-parser-229715"
-  region = "temporal-parser-229715"
+  projet_name = "${var.projet_name}"
+  region = "${var.region}"
   config_file = "${var.config_file}"
 }
 
