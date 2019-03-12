@@ -19,11 +19,11 @@ output "cluster_ca_certificate" {
 }
 
 output "username" {
-  value = "${google_container_cluster.cluster.0.master_auth.0.username}"
+  value = "${google_container_cluster.primary.0.master_auth.0.username}"
   sensitive = true
 }
 
 output "password" {
-  value     = "${google_container_cluster.cluster.0.master_auth.0.password}"
+  value     = "${google_container_cluster.primary.0.master_auth.0.password}"
   sensitive = true
 }
