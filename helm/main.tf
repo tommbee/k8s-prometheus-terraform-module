@@ -1,7 +1,7 @@
 provider "helm" {
   version = "~> 0.6"
   namespace = "kube-system"
-  service_account = "tiller"
+  service_account = "${var.sa_name}}"
   override = ["spec.template.spec.automountserviceaccounttoken=true"]
 
   kubernetes {
