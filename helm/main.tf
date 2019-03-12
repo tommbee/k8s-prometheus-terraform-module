@@ -3,8 +3,8 @@ provider "helm" {
   service_account = "${var.sa_name}}"
 
   kubernetes {
-    client_certificate     = "${var.client_certificate}"
-    client_key             = "${var.client_key}"
+    #client_certificate     = "${var.client_certificate}"
+    #client_key             = "${var.client_key}"
     cluster_ca_certificate = "${var.cluster_ca_certificate}"
     host                   = "${var.host}"
     token                  = "${var.token}"
