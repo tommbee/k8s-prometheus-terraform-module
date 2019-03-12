@@ -11,6 +11,12 @@ provider "helm" {
   }
 }
 
+resource "null_resource" "helm_init" {
+  provisioner "local-exec" {
+    command = "helm init --client-only"
+  }
+}
+
 resource "null_resource" "depends_on_hack" {
   triggers {
     version = "${timestamp()}"
@@ -30,6 +36,7 @@ resource "helm_release" "prometheus_operator" {
 
   depends_on = [
       "null_resource.depends_on_hack",
+      "null_resource.helm_init",
   ]
 
   values = [
