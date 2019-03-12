@@ -9,8 +9,8 @@ module "gke_cluster" {
 module "k8s" {
   source = "k8s"
 
-  #client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
-  #client_key = "${base64decode(module.gke_cluster.client_key)}"
+  client_certificate = "${base64decode(module.gke_cluster.client_certificate)}"
+  client_key = "${base64decode(module.gke_cluster.client_key)}"
   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
   host = "${module.gke_cluster.host}"
   token = "${module.gke_cluster.token}"
