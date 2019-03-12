@@ -22,7 +22,7 @@ output "cluster_ca_certificate" {
   sensitive = true
 }
 
-# output "service_account" {
-#   value = "${module.k8s.helm_service_account}"
-#   sensitive = true
-# }
+output "service_account" {
+  value = "${module.k8s.helm_service_account}"
+  sensitive = true
+}

@@ -23,5 +23,5 @@ module "helm" {
   client_key = "${base64decode(module.gke_cluster.client_key)}"
   cluster_ca_certificate = "${base64decode(module.gke_cluster.cluster_ca_certificate)}"
   host = "${module.gke_cluster.host}"
-  #sa_name = "${module.k8s.helm_service_account}"
+  sa_name = "${module.k8s.helm_service_account}"
 }

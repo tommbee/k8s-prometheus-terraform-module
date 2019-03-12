@@ -27,3 +27,7 @@ output "password" {
   value     = "${google_container_cluster.primary.0.master_auth.0.password}"
   sensitive = true
 }
+
+# output "token" {
+#   value = "${data.google_client_config.default.access_token}"
+# }
