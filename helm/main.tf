@@ -11,6 +11,11 @@ provider "helm" {
   }
 }
 
+data "helm_repository" "coreos" {
+    name = "coreos"
+    url  = "https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/"
+}
+
 resource "null_resource" "depends_on_hack" {
   triggers {
     version = "${timestamp()}"
@@ -24,19 +29,19 @@ resource "null_resource" "depends_on_hack" {
 
 resource "helm_release" "prometheus_operator" {
   name       = "prometheus-operator"
-  repository = "https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/"
+  repository = "${data.helm_repository.coreos.metadata.0.name}"
   chart      = "prometheus-operator"
   namespace  = "monitoring"
 
   depends_on = [
       "null_resource.depends_on_hack",
+      "data.helm_repository.coreos",
   ]
 
   values = [
     "${file("${path.module}/monitoring/prometheus/values.yml")}",
   ]
 }
-
 
 # provider "helm" {
 #   version = "~> 0.6"
