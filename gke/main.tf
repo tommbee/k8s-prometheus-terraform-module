@@ -1,3 +1,5 @@
+data "google_client_config" "default" {}
+
 provider "google" {
   credentials = "${file("${var.config_file}")}"
   project = "${var.projet_name}"

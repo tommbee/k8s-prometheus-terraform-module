@@ -28,6 +28,7 @@ output "password" {
   sensitive = true
 }
 
-# output "token" {
-#   value = "${data.google_client_config.default.access_token}"
-# }
+output "token" {
+  value = "${data.google_client_config.default.access_token}"
+  sensitive = true
+}

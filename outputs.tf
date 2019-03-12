@@ -1,6 +1,7 @@
-# output "token" {
-#   value = "${data.google_client_config.default.access_token}"
-# }
+output "token" {
+  value = "${module.gke_cluster.token}"
+  sensitive = true
+}
 
 output "host" {
   value = "${module.gke_cluster.host}"
