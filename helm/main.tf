@@ -2,7 +2,7 @@ provider "helm" {
   version = "~> 0.8.0"
   service_account = "${var.helm_service_account}"
   namespace       = "${var.helm_namespace}"
-  install_tiller  = true
+  install_tiller  = false
   tiller_image    = "gcr.io/kubernetes-helm/tiller:v2.12.1"
 
   kubernetes {
@@ -14,9 +14,20 @@ provider "helm" {
   }
 }
 
-resource "null_resource" "depends_on_hack" {
-  triggers {
-    version = "${timestamp()}"
+# resource "null_resource" "depends_on_hack" {
+#   triggers {
+#     version = "${timestamp()}"
+#   }
+
+#   connection {
+#     service_account = "${var.helm_service_account}"
+#     namespace       = "${var.helm_namespace}"
+#   }
+# }
+
+resource "null_resource" "helm_init" {
+  provisioner "local-exec" {
+    command = "helm init --service-account ${var.helm_service_account} --wait"
   }
 
   connection {
@@ -28,10 +39,11 @@ resource "null_resource" "depends_on_hack" {
 resource "helm_release" "prometheus_operator" {
   name       = "prometheus-operator"
   chart      = "stable/prometheus-operator"
-  namespace  = "monitoring"
+  #namespace  = "monitoring"
+  namespace  = "${null_resource.helm_init.connection.namespace}"
 
   depends_on = [
-      "null_resource.depends_on_hack",
+      "null_resource.helm_init",
   ]
 
   values = [
