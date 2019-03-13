@@ -1,6 +1,7 @@
 provider "helm" {
   service_account = "${var.helm_service_account}"
   namespace       = "${var.helm_namespace}"
+  debug           = "true"
 
   kubernetes {
     #client_certificate     = "${var.client_certificate}"
@@ -22,23 +23,23 @@ resource "null_resource" "depends_on_hack" {
   }
 }
 
-# resource "helm_repository" "coreos" {
-#   name = "coreos"
-#   url  = "https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/"
-# }
+resource "helm_repository" "coreos" {
+  name = "coreos"
+  url  = "https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/"
+}
 
-# resource "helm_release" "prometheus_operator" {
-#   name       = "prometheus-operator"
-#   repository = "${helm_repository.coreos.metadata.0.name}"
-#   chart      = "prometheus-operator"
-#   namespace  = "monitoring"
+resource "helm_release" "prometheus_operator" {
+  name       = "prometheus-operator"
+  repository = "${helm_repository.coreos.metadata.0.name}"
+  chart      = "prometheus-operator"
+  namespace  = "monitoring"
 
-#   depends_on = [
-#       "null_resource.depends_on_hack",
-#       "helm_repository.coreos",
-#   ]
+  depends_on = [
+      "null_resource.depends_on_hack",
+      "helm_repository.coreos",
+  ]
 
-#   values = [
-#     "${file("${path.module}/monitoring/prometheus/values.yml")}",
-#   ]
-# }
+  values = [
+    "${file("${path.module}/monitoring/prometheus/values.yml")}",
+  ]
+}
