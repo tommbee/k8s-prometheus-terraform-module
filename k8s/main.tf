@@ -11,7 +11,7 @@ provider "kubernetes" {
 
 resource "kubernetes_service_account" "tiller" {
   metadata {
-    name      = "tiller"
+    name      = "terraform-tiller"
     namespace = "kube-system"
   }
   
@@ -20,7 +20,7 @@ resource "kubernetes_service_account" "tiller" {
 
 resource "kubernetes_cluster_role_binding" "tiller" {
   metadata {
-    name = "tiller"
+    name = "terraform-tiller"
   }
 
   role_ref {
@@ -32,7 +32,7 @@ resource "kubernetes_cluster_role_binding" "tiller" {
   subject {
     api_group = ""
     kind      = "ServiceAccount"
-    name      = "tiller"
+    name      = "terraform-tiller"
     namespace = "kube-system"
   }
 }
