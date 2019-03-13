@@ -2,6 +2,7 @@ provider "helm" {
   service_account = "${var.helm_service_account}"
   namespace       = "${var.helm_namespace}"
   debug           = "true"
+  tiller_image = "gcr.io/kubernetes-helm/tiller:v2.8.1"
 
   kubernetes {
     #client_certificate     = "${var.client_certificate}"
