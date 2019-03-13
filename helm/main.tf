@@ -39,8 +39,7 @@ resource "null_resource" "helm_init" {
 resource "helm_release" "prometheus_operator" {
   name       = "prometheus-operator"
   chart      = "stable/prometheus-operator"
-  #namespace  = "monitoring"
-  namespace  = "${null_resource.helm_init.connection.namespace}"
+  namespace  = "monitoring"
 
   depends_on = [
       "null_resource.helm_init",
