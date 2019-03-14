@@ -25,23 +25,13 @@ resource "null_resource" "depends_on_hack" {
   }
 }
 
-resource "null_resource" "helm_init" {
-  provisioner "local-exec" {
-    command = "helm init --service-account ${var.helm_service_account} --wait"
-  }
-
-  depends_on = [
-      "null_resource.depends_on_hack",
-  ]
-}
-
 resource "helm_release" "prometheus_operator" {
   name       = "prometheus-operator"
   chart      = "stable/prometheus-operator"
   namespace  = "monitoring"
 
   depends_on = [
-      "null_resource.helm_init",
+      "null_resource.depends_on_hack",
   ]
 
   values = [

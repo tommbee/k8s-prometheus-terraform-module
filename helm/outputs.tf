@@ -6,5 +6,5 @@ output "helm_namespace" {
   value = "${var.helm_namespace}"
 }
 output "helm_init_id" {
-  value = "${null_resource.helm_init.id}"
+  value = "${helm_release.prometheus_operator.id}"
 }
