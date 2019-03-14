@@ -30,3 +30,7 @@ output "helm_service_account" {
 output "helm_namespace" {
   value = "${module.helm.helm_namespace}"
 }
+
+output "helm_init_id" {
+  value = "${module.helm.helm_init_id}"
+}
