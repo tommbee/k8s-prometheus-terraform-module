@@ -1,21 +1,17 @@
-# provider "helm" {
-#   version = "~> 0.8.0"
-#   service_account = "${var.helm_service_account}"
-#   namespace       = "${var.helm_namespace}"
-#   install_tiller  = true
-#   tiller_image    = "gcr.io/kubernetes-helm/tiller:v2.13.0"
-
-#   kubernetes {
-#     #client_certificate     = "${var.client_certificate}"
-#     #client_key             = "${var.client_key}"
-#     cluster_ca_certificate = "${var.cluster_ca_certificate}"
-#     host                   = "${var.host}"
-#     token                  = "${var.token}"
-#   }
-# }
-
 provider "helm" {
   version = "~> 0.8.0"
+  service_account = "${var.helm_service_account}"
+  namespace       = "${var.helm_namespace}"
+  install_tiller  = true
+  tiller_image    = "gcr.io/kubernetes-helm/tiller:v2.13.0"
+
+  kubernetes {
+    #client_certificate     = "${var.client_certificate}"
+    #client_key             = "${var.client_key}"
+    cluster_ca_certificate = "${var.cluster_ca_certificate}"
+    host                   = "${var.host}"
+    token                  = "${var.token}"
+  }
 }
 
 resource "null_resource" "depends_on_hack" {
