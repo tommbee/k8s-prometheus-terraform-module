@@ -26,7 +26,7 @@ resource "google_container_cluster" "primary" {
 
 resource "random_id" "np" {
   byte_length = 11
-  prefix      = "${var.cluster_name}-np-"
+  prefix      = "${var.cluster_name}-"
 
   keepers = {
     machine_type = "${var.machine_type}"
