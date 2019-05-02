@@ -5,8 +5,7 @@ provider "google" {
 }
 
 resource "google_container_cluster" "primary" {
-  name = "${var.projet_name}-initial-primary"
-  zone = "${var.region}"
+  name = "${var.cluster_name}-cluster"
   project = "${var.projet_name}"
   initial_node_count       = 1
   remove_default_node_pool = true
@@ -14,7 +13,7 @@ resource "google_container_cluster" "primary" {
   node_version = "1.11.8-gke.6"
 
   node_config {
-    machine_type = "n1-standard-2"
+    machine_type = "${var.machine_type}"
     oauth_scopes = [
       "https://www.googleapis.com/auth/compute",
       "https://www.googleapis.com/auth/devstorage.read_only",
@@ -29,7 +28,7 @@ resource "random_id" "np" {
   prefix      = "${var.cluster_name}-np-"
 
   keepers = {
-    machine_type = "n1-standard-2"
+    machine_type = "${var.machine_type}"
   }
 }
 
@@ -42,7 +41,7 @@ resource "google_container_node_pool" "cluster_nodes" {
   version    = "1.11.8-gke.6"
 
   node_config {
-    machine_type = "n1-standard-2"
+    machine_type = "${var.machine_type}"
   }
 
   lifecycle {

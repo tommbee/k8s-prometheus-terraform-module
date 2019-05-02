@@ -5,6 +5,7 @@ module "gke_cluster" {
   region = "${var.region}"
   config_file = "${var.config_file}"
   cluster_name = "${var.cluster_name}"
+  machine_type = "${var.machine_type}"
 }
 
 module "k8s" {
