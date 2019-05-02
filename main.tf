@@ -4,6 +4,7 @@ module "gke_cluster" {
   projet_name = "${var.projet_name}"
   region = "${var.region}"
   config_file = "${var.config_file}"
+  cluster_name = "${var.cluster_name}"
 }
 
 module "k8s" {
