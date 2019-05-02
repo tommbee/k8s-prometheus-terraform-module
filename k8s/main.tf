@@ -1,12 +1,9 @@
 provider "kubernetes" {
   version = ">= 1.5.2"
-  #client_certificate     = "${var.client_certificate}"
-  #client_key             = "${var.client_key}"
-  cluster_ca_certificate = "${var.cluster_ca_certificate}"
-  host                   = "${var.host}"
-  token                  = "${var.token}"
-
-  load_config_file = false
+  # cluster_ca_certificate = "${var.cluster_ca_certificate}"
+  # host                   = "${var.host}"
+  # token                  = "${var.token}"
+  config_path = "${var.kubeconfig}"
 }
 
 resource "kubernetes_service_account" "tiller" {
