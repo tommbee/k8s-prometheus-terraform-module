@@ -11,6 +11,7 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   min_master_version = "1.11.8-gke.6"
   node_version = "1.11.8-gke.6"
+  zone       = "${var.region}"
 
   node_config {
     machine_type = "${var.machine_type}"
@@ -35,7 +36,7 @@ resource "random_id" "np" {
 resource "google_container_node_pool" "cluster_nodes" {
   project    = "${var.projet_name}"
   name       = "${random_id.np.dec}"
-  zone   = "${var.region}"
+  zone       = "${var.region}"
   cluster    = "${google_container_cluster.primary.name}"
   node_count = 1
   version    = "1.11.8-gke.6"
