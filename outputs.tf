@@ -24,11 +24,11 @@
 # }
 
 output "helm_service_account" {
-  value = "${module.helm.helm_service_account}"
+  value = "${module.k8s.helm_service_account}"
 }
 
 output "helm_namespace" {
-  value = "${module.helm.helm_namespace}"
+  value = "${module.k8s.helm_namespace}"
 }
 
 output "kubeconfig" {
