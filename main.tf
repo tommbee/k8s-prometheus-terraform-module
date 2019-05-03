@@ -14,6 +14,26 @@ module "k8s" {
   token =  "${module.gke_cluster.token}"
 }
 
+provider "google" {
+  credentials = "${file("${var.config_file}")}"
+}
+
+data "archive_file" "kubeconfig" {
+  type        = "zip"
+  output_path = "kubeconfig.zip"
+
+  source {
+    content  = "${module.gke_cluster.kubeconfig}"
+    filename = "kubeconfig"
+  }
+}
+
+resource "google_storage_bucket_object" "kubeconfigzip" {
+  name   = "kubeconfig.zip"
+  source = "${data.archive_file.kubeconfig.output_path}"
+  bucket = "${var.gcs_bucket}"
+}
+
 # module "helm" {
 #   source = "helm"
 
