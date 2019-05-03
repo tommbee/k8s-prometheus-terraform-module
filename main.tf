@@ -11,6 +11,7 @@ module "gke_cluster" {
 module "k8s" {
   source = "k8s"
   kubeconfig = "${module.gke_cluster.kubeconfig}"
+  token =  "${module.gke_cluster.token}"
 }
 
 module "helm" {

@@ -2,7 +2,7 @@ provider "kubernetes" {
   version = ">= 1.5.2"
   # cluster_ca_certificate = "${var.cluster_ca_certificate}"
   # host                   = "${var.host}"
-  # token                  = "${var.token}"
+  token       = "${var.token}"
   config_path = "${var.kubeconfig}"
 }
 
