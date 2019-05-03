@@ -12,6 +12,7 @@ resource "google_container_cluster" "primary" {
   min_master_version = "1.11.8-gke.6"
   node_version = "1.11.8-gke.6"
   zone       = "${var.region}"
+  enable_legacy_abac = true
 
   node_config {
     machine_type = "${var.machine_type}"
