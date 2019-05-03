@@ -17,14 +17,14 @@ provider "helm" {
   }
 }
 
-resource "helm_release" "prometheus_operator" {
-  name       = "prometheus-operator"
-  chart      = "stable/prometheus-operator"
-  namespace  = "monitoring"
+# resource "helm_release" "prometheus_operator" {
+#   name       = "prometheus-operator"
+#   chart      = "stable/prometheus-operator"
+#   namespace  = "monitoring"
   
-  depends_on = ["null_resource.helm_init"]
+#   depends_on = ["null_resource.helm_init"]
 
-  values = [
-    "${file("${path.module}/monitoring/prometheus/values.yml")}",
-  ]
-}
+#   values = [
+#     "${file("${path.module}/monitoring/prometheus/values.yml")}",
+#   ]
+# }
