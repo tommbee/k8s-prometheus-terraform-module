@@ -27,9 +27,9 @@ output "helm_service_account" {
   value = "${module.helm.helm_service_account}"
 }
 
-# output "helm_namespace" {
-#   value = "${module.helm.helm_namespace}"
-# }
+output "helm_namespace" {
+  value = "${module.helm.helm_namespace}"
+}
 
 output "kubeconfig" {
   value = "${module.gke_cluster.kubeconfig}"

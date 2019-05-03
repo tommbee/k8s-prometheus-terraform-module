@@ -8,15 +8,15 @@ module "gke_cluster" {
   machine_type = "${var.machine_type}"
 }
 
-# module "k8s" {
-#   source = "k8s"
-#   kubeconfig = "${module.gke_cluster.kubeconfig}"
-# }
+module "k8s" {
+  source = "k8s"
+  kubeconfig = "${module.gke_cluster.kubeconfig}"
+}
 
 module "helm" {
   source = "helm"
 
   helm_service_account = "default"
-  #helm_namespace = "${module.k8s.helm_namespace}"
+  helm_namespace = "${module.k8s.helm_namespace}"
   kubeconfig = "${module.gke_cluster.kubeconfig}"
 }
