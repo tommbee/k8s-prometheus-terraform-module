@@ -18,8 +18,8 @@ provider "google" {
   credentials = "${file("${var.config_file}")}"
 }
 
-resource "google_storage_bucket_object" "kubeconfigzip" {
-  name   = "kubeconfig.zip"
+resource "google_storage_bucket_object" "kubeconfig" {
+  name   = "kubeconfig"
   source = "${module.gke_cluster.kubeconfig}"
   bucket = "${var.gcs_bucket}"
 }
