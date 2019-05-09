@@ -43,5 +43,5 @@ module "helm" {
   token =  "${module.gke_cluster.token}"
   cluster_ca_certificate =  "${module.gke_cluster.cluster_ca_certificate}"
   host =  "${module.gke_cluster.host}"
-  # kubeconfig = "${module.gke_cluster.kubeconfig}"
+  kubeconfig = "${module.gke_cluster.kubeconfig}"
 }
