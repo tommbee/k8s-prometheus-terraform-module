@@ -38,7 +38,7 @@ resource "google_storage_bucket_object" "kubeconfig" {
 module "helm" {
   source = "helm"
 
-  helm_service_account = "default"
+  helm_service_account = "${module.k8s.helm_service_account}"
   helm_namespace = "${module.k8s.helm_namespace}"
   token =  "${module.gke_cluster.token}"
   cluster_ca_certificate =  "${module.gke_cluster.cluster_ca_certificate}"
