@@ -37,3 +37,7 @@ output "kubeconfig" {
   value       = "${local_file.kubeconfig.filename}"
   sensitive   = true
 }
+
+output "email" {
+  value = "${data.google_client_openid_userinfo.me.email}"
+}

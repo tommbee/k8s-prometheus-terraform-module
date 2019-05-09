@@ -14,6 +14,7 @@ module "k8s" {
   token =  "${module.gke_cluster.token}"
   cluster_ca_certificate =  "${module.gke_cluster.cluster_ca_certificate}"
   host =  "${module.gke_cluster.host}"
+  email_address = "${module.gke_cluster.email}"
 }
 
 provider "google" {

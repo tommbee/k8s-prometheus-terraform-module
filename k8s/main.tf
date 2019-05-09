@@ -17,6 +17,23 @@ resource "kubernetes_service_account" "tiller" {
   automount_service_account_token = true
 }
 
+resource "kubernetes_cluster_role_binding" "user" {
+  metadata {
+    name = "provider-user-admin"
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+
+  subject {
+    kind = "User"
+    name = "${var.email_address}"
+  }
+}
+
 resource "kubernetes_cluster_role_binding" "tiller" {
   metadata {
     name = "tiller"

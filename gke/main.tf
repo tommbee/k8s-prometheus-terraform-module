@@ -54,6 +54,7 @@ resource "google_container_node_pool" "cluster_nodes" {
 }
 
 data "google_client_config" "default" {}
+data "google_client_openid_userinfo" "me" {}
 
 data "template_file" "kubeconfig" {
   template = "${file("${path.module}/template/kubeconfig.cert.tpl")}"
