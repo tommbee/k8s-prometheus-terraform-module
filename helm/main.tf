@@ -1,5 +1,6 @@
 resource "null_resource" "helm_init" {
   provisioner "local-exec" {
+    #command = "helm init --client-only"
     command = "helm init --service-account ${var.helm_service_account} --wait --kubeconfig ${var.kubeconfig}"
   }
 }

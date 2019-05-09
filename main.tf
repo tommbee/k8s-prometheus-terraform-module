@@ -24,10 +24,10 @@ resource "google_storage_bucket_object" "kubeconfig" {
   bucket = "${var.gcs_bucket}"
 }
 
-# module "helm" {
-#   source = "helm"
+module "helm" {
+  source = "helm"
 
-#   helm_service_account = "default"
-#   helm_namespace = "${module.k8s.helm_namespace}"
-#   kubeconfig = "${module.gke_cluster.kubeconfig}"
-# }
+  helm_service_account = "default"
+  helm_namespace = "${module.k8s.helm_namespace}"
+  kubeconfig = "${module.gke_cluster.kubeconfig}"
+}
