@@ -1,11 +1,6 @@
 resource "null_resource" "helm_init" {
   provisioner "local-exec" {
-    command = "chmod +x ${path.module}/install-helm.sh"
-  }
-
-  provisioner "local-exec" {
-    command = "${path.module}/install-helm.sh"
-    #command = "helm init --client-only"
+    command = "helm init --client-only"
     #command = "helm init --service-account ${var.helm_service_account} --wait --kubeconfig ${var.kubeconfig}"
   }
 }
