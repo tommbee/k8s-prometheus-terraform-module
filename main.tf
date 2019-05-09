@@ -3,7 +3,7 @@ module "gke_cluster" {
   
   projet_name = "${var.projet_name}"
   region = "${var.region}"
-  config_file = "${var.config_file}"
+  # config_file = "${var.config_file}"
   cluster_name = "${var.cluster_name}"
   machine_type = "${var.machine_type}"
 }
@@ -18,6 +18,14 @@ module "k8s" {
 }
 
 provider "google" {
+  scopes = [
+    "https://www.googleapis.com/auth/compute",
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/ndev.clouddns.readwrite",
+    "https://www.googleapis.com/auth/devstorage.full_control",
+    "https://www.googleapis.com/auth/userinfo.email",
+  ]
+
   credentials = "${file("${var.config_file}")}"
 }
 

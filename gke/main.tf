@@ -1,8 +1,8 @@
-provider "google" {
-  credentials = "${file("${var.config_file}")}"
-  #credentials = "${base64decode(var.google_creds_base64)}"
-  project = "${var.projet_name}"
-}
+# provider "google" {
+#   credentials = "${file("${var.config_file}")}"
+#   #credentials = "${base64decode(var.google_creds_base64)}"
+#   project = "${var.projet_name}"
+# }
 
 resource "google_container_cluster" "primary" {
   name = "${var.cluster_name}-cluster"
