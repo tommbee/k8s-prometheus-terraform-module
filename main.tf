@@ -10,8 +10,10 @@ module "gke_cluster" {
 
 module "k8s" {
   source = "k8s"
-  kubeconfig = "${module.gke_cluster.kubeconfig}"
+  #kubeconfig = "${module.gke_cluster.kubeconfig}"
   token =  "${module.gke_cluster.token}"
+  cluster_ca_certificate =  "${module.gke_cluster.cluster_ca_certificate}"
+  host =  "${module.gke_cluster.host}"
 }
 
 provider "google" {
@@ -29,5 +31,8 @@ module "helm" {
 
   helm_service_account = "default"
   helm_namespace = "${module.k8s.helm_namespace}"
-  kubeconfig = "${module.gke_cluster.kubeconfig}"
+  token =  "${module.gke_cluster.token}"
+  cluster_ca_certificate =  "${module.gke_cluster.cluster_ca_certificate}"
+  host =  "${module.gke_cluster.host}"
+  # kubeconfig = "${module.gke_cluster.kubeconfig}"
 }

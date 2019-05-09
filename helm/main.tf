@@ -1,7 +1,7 @@
 resource "null_resource" "helm_init" {
   provisioner "local-exec" {
-    #command = "helm init --client-only"
-    command = "helm init --service-account ${var.helm_service_account} --wait --kubeconfig ${var.kubeconfig}"
+    command = "helm init --client-only"
+    #command = "helm init --service-account ${var.helm_service_account} --wait --kubeconfig ${var.kubeconfig}"
   }
 }
 
@@ -14,7 +14,12 @@ provider "helm" {
   tiller_image    = "gcr.io/kubernetes-helm/tiller:v2.13.0"
 
   kubernetes {
-    config_path = "${var.kubeconfig}"
+    cluster_ca_certificate  = "${var.cluster_ca_certificate}"
+    host                    = "${var.host}"
+    token                   = "${var.token}"
+
+    load_config_file = false
+    #config_path = "${var.kubeconfig}"
   }
 }
 
