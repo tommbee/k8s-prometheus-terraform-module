@@ -36,7 +36,7 @@ resource "google_container_node_pool" "cluster_nodes" {
   name       = "${random_id.np.dec}"
   zone       = "${var.region}"
   cluster    = "${google_container_cluster.primary.name}"
-  node_count = 1
+  node_count = "${var.node_count}"
   version    = "1.11.8-gke.6"
 
   node_config {

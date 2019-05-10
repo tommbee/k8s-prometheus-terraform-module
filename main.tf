@@ -6,6 +6,7 @@ module "gke_cluster" {
   # config_file = "${var.config_file}"
   cluster_name = "${var.cluster_name}"
   machine_type = "${var.machine_type}"
+  node_count = "${var.node_count}"
 }
 
 module "k8s" {
