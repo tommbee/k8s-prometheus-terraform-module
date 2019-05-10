@@ -66,6 +66,7 @@ data "template_file" "kubeconfig" {
     server                     = "https://${google_container_cluster.primary.0.endpoint}"
     client_cert                = "${google_container_cluster.primary.0.master_auth.0.client_certificate}"
     client_key                 = "${google_container_cluster.primary.0.master_auth.0.client_key}"
+    token                      = "${data.google_client_config.default.access_token}"
   }
 }
 
