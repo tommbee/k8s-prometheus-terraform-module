@@ -7,8 +7,8 @@ module "gke_cluster" {
   cluster_name = "${var.cluster_name}"
   machine_type = "${var.machine_type}"
   node_count = "${var.node_count}"
-  kubernetes_verion = "${var.kubernetes_verion}"
-  master_kubernetes_verion = "${var.master_kubernetes_verion}"
+  kubernetes_version = "${var.kubernetes_version}"
+  master_kubernetes_version = "${var.master_kubernetes_version}"
 }
 
 module "k8s" {
