@@ -6,3 +6,4 @@ variable "cluster_name" {}
 variable "machine_type" {}
 variable "node_count" {}
 variable "kubernetes_verion" {}
+variable "master_kubernetes_verion" {}
