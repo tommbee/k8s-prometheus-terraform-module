@@ -3,8 +3,8 @@ resource "google_container_cluster" "primary" {
   project = "${var.projet_name}"
   initial_node_count       = 1
   remove_default_node_pool = true
-  min_master_version = "1.11.8-gke.6"
-  node_version = "1.11.8-gke.6"
+  min_master_version = "${var.kubernetes_verion}"
+  node_version = "${var.kubernetes_verion}"
   zone       = "${var.region}"
 
   node_config {
@@ -37,7 +37,7 @@ resource "google_container_node_pool" "cluster_nodes" {
   zone       = "${var.region}"
   cluster    = "${google_container_cluster.primary.name}"
   node_count = "${var.node_count}"
-  version    = "1.11.8-gke.6"
+  version    = "${var.kubernetes_verion}"
 
   node_config {
     machine_type = "${var.machine_type}"
